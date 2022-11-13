@@ -19,28 +19,18 @@
  * 
  * This counter can be used as timebase for functions of time, f(t)=sin(w*t), 
  * due to it not resetting.
- * 
- * USAGE:
- * 1. Place the following in the Update callback
- * void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
- *     if (htim == <LONGCOUNTER_handle_name>._htim) {
- *         LONGCOUNTER_TIM_OverflowCallback(&<LONGCOUNTER_handle_name>);
- *     }
- * }
- * 
- * 2. Init the counter with LONGCOUNTER_init();
  */
 
 #ifndef LONGCOUNTER_H
 #define LONGCOUNTER_H
 
-#include "tim.h"
+#include "main.h"
 #include <stdint.h>
 
 #define LONGCOUNTER_TIM_LENGTH 16
 
 typedef uint64_t LONGCOUNTER_Counter_Type;
-// typedef HAL_StatusTypeDef (*LONGCOUNTER_CallbackTypeDef)();
+
 typedef struct LONGCOUNTER_HandleStruct {
     TIM_HandleTypeDef *_htim;
     LONGCOUNTER_Counter_Type _counter;
@@ -67,7 +57,8 @@ LONGCOUNTER_Counter_Type LONGCOUNTER_get_counter(LONGCOUNTER_HandleTypeDef *hand
  * @brief     Function to be called in the HAL_TIM_PeriodElapsedCallback function
  * 
  * @param     handle Reference to the handle
+ * @param     htim Parameter of the HAL_TIM_PeriodElapsedCallback function
  */
-void LONGCOUNTER_TIM_OverflowCallback(LONGCOUNTER_HandleTypeDef *handle);
+void LONGCOUNTER_TIM_OverflowCallback(LONGCOUNTER_HandleTypeDef *handle, TIM_HandleTypeDef *htim);
 
 #endif //LONGCOUNTER_H

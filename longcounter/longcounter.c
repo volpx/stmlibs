@@ -32,6 +32,8 @@ LONGCOUNTER_Counter_Type LONGCOUNTER_get_counter(LONGCOUNTER_HandleTypeDef *hand
     return ((handle->_counter)&(~((1ul<<LONGCOUNTER_TIM_LENGTH)-1)))|((handle->_htim->Instance->CNT)&((1ul<<LONGCOUNTER_TIM_LENGTH)-1));
 }
 
-void LONGCOUNTER_TIM_OverflowCallback(LONGCOUNTER_HandleTypeDef *handle){
-    handle->_counter+=(1<<LONGCOUNTER_TIM_LENGTH);
+void LONGCOUNTER_TIM_OverflowCallback(LONGCOUNTER_HandleTypeDef *handle, TIM_HandleTypeDef *htim){
+    if (htim == handle->_htim) {
+        handle->_counter+=(1<<LONGCOUNTER_TIM_LENGTH);
+    }
 }
