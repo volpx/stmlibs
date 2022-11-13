@@ -44,6 +44,20 @@ typedef struct MUSIC_ChannelHandleStruct {
  */
 HAL_StatusTypeDef MUSIC_init(MUSIC_ChannelHandleTypeDef *handle, uint64_t (*get_tick)());
 /**
+ * @brief     Start the channel
+ * 
+ * @param     handle Reference to the struct to be initialized
+ * @return    HAL_OK on success, HAL_ERROR on failure
+ */
+HAL_StatusTypeDef MUSIC_start(MUSIC_ChannelHandleTypeDef *handle);
+/**
+ * @brief     MUSIC logic routine to call
+ * 
+ * @param     handle Reference to the handle
+ * @return    HAL_OK on success, HAL_ERROR on failure
+ */
+HAL_StatusTypeDef MUSIC_routine(MUSIC_ChannelHandleTypeDef *handle);
+/**
  * @brief     Gets the MUSIC_HandleTypeDef 
  * 
  * @param     handle Reference to the handle
